@@ -1,0 +1,1198 @@
+/* ============================================
+           CSS VARIABLES - The Park Prodigy Brand
+           ============================================ */
+        :root {
+            --tpp-blue: #2B7DC9;
+            --tpp-blue-light: #6AB3F8;
+            --tpp-blue-dark: #1a5a94;
+            --tpp-blue-pale: #E8F4FD;
+            --tpp-orange: #F5A623;
+            --tpp-orange-dark: #d4900e;
+
+            --tpp-white: #ffffff;
+            --tpp-gray-light: #f8fafc;
+            --tpp-gray: #64748b;
+            --tpp-gray-dark: #334155;
+            --tpp-dark: #1e293b;
+            --tpp-success: #22c55e;
+            --tpp-success-light: #dcfce7;
+            --tpp-warning: #f59e0b;
+            --tpp-warning-light: #fef3c7;
+            --tpp-error: #ef4444;
+            --tpp-error-light: #fee2e2;
+            --tpp-shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --tpp-shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --tpp-shadow-lg: 0 8px 30px rgba(0,0,0,0.15);
+            --tpp-radius: 12px;
+            --tpp-radius-lg: 16px;
+            --tpp-transition: all 0.3s ease;
+
+            /* Park Colors */
+            --mk-purple: #4a1a7a;
+            --mk-purple-light: #f3e8ff;
+            --epcot-teal: #0891b2;
+            --epcot-teal-light: #e0f7fa;
+            --hs-red: #dc2626;
+            --hs-red-light: #fee2e2;
+            --ak-green: #16a34a;
+            --ak-green-light: #dcfce7;
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+.header_blog_content_new {
+    display: none;
+}
+        .tpp-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .tpp-header {
+            background: linear-gradient(135deg, var(--tpp-blue-dark) 0%, var(--tpp-blue) 50%, var(--tpp-blue-light) 100%);
+            border-radius: var(--tpp-radius-lg);
+            padding: 40px 30px;
+            text-align: center;
+            margin-bottom: 24px;
+            box-shadow: var(--tpp-shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tpp-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .tpp-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--tpp-white);
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tpp-header h1 .tpp-lightning {
+            color: var(--tpp-orange);
+        }
+
+        .tpp-header p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tpp-badge-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tpp-badge {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            padding: 6px 16px;
+            color: var(--tpp-white);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ============================================
+           PARK TABS
+           ============================================ */
+        .tpp-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tpp-tab {
+            flex: 1;
+            min-width: 140px;
+            padding: 14px 16px;
+            border: 2px solid var(--tpp-gray-light);
+            border-radius: var(--tpp-radius);
+            background: var(--tpp-blue-pale);
+            cursor: pointer;
+            transition: var(--tpp-transition);
+            text-align: center;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--tpp-gray);
+        }
+
+        .tpp-tab:hover {
+            border-color: var(--tpp-blue-light);
+        }
+
+        .tpp-tab.active {
+            border-color: var(--tpp-blue);
+            background: var(--tpp-blue);
+            color: var(--tpp-white);
+        }
+
+        .tpp-tab[data-park="mk"].active { background: var(--mk-purple); border-color: var(--mk-purple); }
+        .tpp-tab[data-park="epcot"].active { background: var(--epcot-teal); border-color: var(--epcot-teal); }
+        .tpp-tab[data-park="hs"].active { background: var(--hs-red); border-color: var(--hs-red); }
+        .tpp-tab[data-park="ak"].active { background: var(--ak-green); border-color: var(--ak-green); }
+
+        .tpp-tab-icon {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* ============================================
+           PARK PANELS
+           ============================================ */
+        .tpp-panel {
+            display: none;
+            background: var(--tpp-white);
+            border-radius: var(--tpp-radius-lg);
+            box-shadow: var(--tpp-shadow-md);
+            overflow: hidden;
+        }
+
+        .tpp-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tpp-panel-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .tpp-panel-header[data-park="mk"] { background: var(--mk-purple-light); }
+        .tpp-panel-header[data-park="epcot"] { background: var(--epcot-teal-light); }
+        .tpp-panel-header[data-park="hs"] { background: var(--hs-red-light); }
+        .tpp-panel-header[data-park="ak"] { background: var(--ak-green-light); }
+
+        .tpp-panel-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--tpp-dark);
+            margin-bottom: 4px;
+        }
+
+        .tpp-panel-subtitle {
+            font-size: 13px;
+            color: var(--tpp-gray);
+        }
+
+        .tpp-tier-info {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tpp-tier-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .tpp-tier-badge.tier1 {
+            background: var(--tpp-orange);
+            color: white;
+        }
+
+        .tpp-tier-badge.tier2 {
+            background: var(--tpp-blue);
+            color: white;
+        }
+
+        .tpp-tier-badge.single {
+            background: var(--tpp-gray-dark);
+            color: white;
+        }
+
+        .tpp-tier-badge .count {
+            background: rgba(255,255,255,0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* ============================================
+           ATTRACTION SECTIONS
+           ============================================ */
+        .tpp-section {
+            padding: 20px 24px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .tpp-section:last-child {
+            border-bottom: none;
+        }
+
+        .tpp-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .tpp-section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--tpp-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tpp-section-title .tier-label {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .tpp-section-title .tier-label.tier1 { background: var(--tpp-orange); color: white; }
+        .tpp-section-title .tier-label.tier2 { background: var(--tpp-blue); color: white; }
+        .tpp-section-title .tier-label.single { background: var(--tpp-gray-dark); color: white; }
+        .tpp-section-title .tier-label.multi { background: var(--tpp-blue); color: white; }
+
+        .tpp-section-count {
+            font-size: 13px;
+            color: var(--tpp-gray);
+            font-weight: 600;
+        }
+
+        /* ============================================
+           ATTRACTION ITEMS
+           ============================================ */
+        .tpp-attractions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .tpp-attraction {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--tpp-gray-light);
+            border-radius: var(--tpp-radius);
+            cursor: pointer;
+            transition: var(--tpp-transition);
+            border: 2px solid transparent;
+        }
+
+        .tpp-attraction:hover {
+            background: var(--tpp-blue-pale);
+            border-color: var(--tpp-blue-light);
+        }
+
+        .tpp-attraction.selected {
+            background: var(--tpp-success-light);
+            border-color: var(--tpp-success);
+        }
+
+        .tpp-attraction.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #f1f5f9;
+        }
+
+        .tpp-attraction.disabled:hover {
+            background: #f1f5f9;
+            border-color: transparent;
+        }
+
+        .tpp-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: var(--tpp-transition);
+            background: var(--tpp-white);
+        }
+
+        .tpp-attraction.selected .tpp-checkbox {
+            background: var(--tpp-success);
+            border-color: var(--tpp-success);
+        }
+
+        .tpp-checkbox svg {
+            width: 14px;
+            height: 14px;
+            stroke: white;
+            stroke-width: 3;
+            opacity: 0;
+            transition: var(--tpp-transition);
+        }
+
+        .tpp-attraction.selected .tpp-checkbox svg {
+            opacity: 1;
+        }
+
+        .tpp-attraction-info {
+            flex: 1;
+        }
+
+        .tpp-attraction-name {
+            font-weight: 600;
+            color: var(--tpp-dark);
+            font-size: 14px;
+        }
+
+        .tpp-attraction-note {
+            font-size: 12px;
+            color: var(--tpp-warning);
+            margin-top: 2px;
+            font-style: italic;
+        }
+
+        .tpp-attraction-note.closed {
+            color: var(--tpp-error);
+        }
+
+        .tpp-wait-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .tpp-wait-badge.high { background: var(--tpp-error-light); color: var(--tpp-error); }
+        .tpp-wait-badge.medium { background: var(--tpp-warning-light); color: #b45309; }
+        .tpp-wait-badge.low { background: var(--tpp-success-light); color: #15803d; }
+
+        /* ============================================
+           SUMMARY PANEL
+           ============================================ */
+        .tpp-summary {
+            background: var(--tpp-white);
+            border-radius: var(--tpp-radius-lg);
+            box-shadow: var(--tpp-shadow-md);
+            margin-top: 24px;
+            overflow: hidden;
+        }
+
+        .tpp-summary-header {
+            background: linear-gradient(135deg, var(--tpp-dark) 0%, var(--tpp-gray-dark) 100%);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .tpp-summary-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--tpp-white);
+        }
+
+        .tpp-summary-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tpp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--tpp-transition);
+            border: none;
+            text-decoration: none;
+        }
+
+        .tpp-btn-primary {
+            background: var(--tpp-orange);
+            color: white;
+        }
+
+        .tpp-btn-primary:hover {
+            background: var(--tpp-orange-dark);
+        }
+
+        .tpp-btn-secondary {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .tpp-btn-secondary:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .tpp-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .tpp-summary-body {
+            padding: 24px;
+        }
+
+        .tpp-summary-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--tpp-gray);
+        }
+
+        .tpp-summary-empty-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+            opacity: 0.5;
+        }
+
+        .tpp-summary-parks {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tpp-summary-park {
+            border: 1px solid #e2e8f0;
+            border-radius: var(--tpp-radius);
+            overflow: hidden;
+        }
+
+        .tpp-summary-park-header {
+            padding: 12px 16px;
+            font-weight: 700;
+            color: white;
+            font-size: 14px;
+        }
+
+        .tpp-summary-park-header.mk { background: var(--mk-purple); }
+        .tpp-summary-park-header.epcot { background: var(--epcot-teal); }
+        .tpp-summary-park-header.hs { background: var(--hs-red); }
+        .tpp-summary-park-header.ak { background: var(--ak-green); }
+
+        .tpp-summary-park-body {
+            padding: 16px;
+        }
+
+        .tpp-summary-tier {
+            margin-bottom: 12px;
+        }
+
+        .tpp-summary-tier:last-child {
+            margin-bottom: 0;
+        }
+
+        .tpp-summary-tier-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--tpp-gray);
+            margin-bottom: 6px;
+        }
+
+        .tpp-summary-ride {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 13px;
+        }
+
+        .tpp-summary-ride:last-child {
+            border-bottom: none;
+        }
+
+        .tpp-summary-ride::before {
+            content: '✓';
+            color: var(--tpp-success);
+            font-weight: 700;
+        }
+
+        .tpp-summary-ride .tpp-wait-badge {
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        .tpp-summary-note {
+            font-size: 11px;
+            color: var(--tpp-orange);
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        /* ============================================
+           PRE-BOOKING CHECKLIST
+           ============================================ */
+        .tpp-checklist {
+            background: var(--tpp-white);
+            border-radius: var(--tpp-radius-lg);
+            box-shadow: var(--tpp-shadow-md);
+            margin-top: 24px;
+            overflow: hidden;
+        }
+
+        .tpp-checklist-header {
+            background: var(--tpp-blue);
+            padding: 16px 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .tpp-checklist-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tpp-checklist-toggle {
+            color: white;
+            font-size: 20px;
+            transition: var(--tpp-transition);
+        }
+
+        .tpp-checklist.open .tpp-checklist-toggle {
+            transform: rotate(180deg);
+        }
+
+        .tpp-checklist-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .tpp-checklist.open .tpp-checklist-body {
+            max-height: 1000px;
+        }
+
+        .tpp-checklist-content {
+            padding: 24px;
+        }
+
+        .tpp-checklist-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .tpp-checklist-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--tpp-gray-light);
+            border-radius: 8px;
+        }
+
+        .tpp-checklist-item-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .tpp-checklist-item-text {
+            flex: 1;
+        }
+
+        .tpp-checklist-item-title {
+            font-weight: 700;
+            color: var(--tpp-dark);
+            margin-bottom: 2px;
+        }
+
+        .tpp-checklist-item-desc {
+            font-size: 13px;
+            color: var(--tpp-gray);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .tpp-footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--tpp-gray);
+            font-size: 13px;
+        }
+
+        .tpp-footer a {
+            color: var(--tpp-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .tpp-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           EMAIL MODAL
+           ============================================ */
+        .tpp-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .tpp-modal-overlay.active {
+            display: flex;
+        }
+
+        .tpp-modal {
+            background: var(--tpp-white);
+            border-radius: var(--tpp-radius-lg);
+            max-width: 400px;
+            width: 100%;
+            padding: 30px;
+            box-shadow: var(--tpp-shadow-lg);
+        }
+
+        .tpp-modal h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--tpp-dark);
+            margin-bottom: 8px;
+        }
+
+        .tpp-modal p {
+            color: var(--tpp-gray);
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .tpp-modal input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            margin-bottom: 20px;
+        }
+
+        .tpp-modal input:focus {
+            outline: none;
+            border-color: var(--tpp-blue);
+        }
+
+        .tpp-modal-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .tpp-modal-actions .tpp-btn {
+            flex: 1;
+        }
+
+        .tpp-btn-outline {
+            background: transparent;
+            border: 2px solid #e2e8f0;
+            color: var(--tpp-gray-dark);
+        }
+
+        .tpp-btn-outline:hover {
+            background: var(--tpp-gray-light);
+        }
+
+        /* ============================================
+           TOAST
+           ============================================ */
+        .tpp-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--tpp-dark);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: var(--tpp-shadow-lg);
+            z-index: 1001;
+            animation: toastIn 0.3s ease;
+        }
+
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .tpp-header h1 {
+                font-size: 24px;
+            }
+
+            .tpp-tabs {
+                gap: 6px;
+            }
+
+            .tpp-tab {
+                min-width: 70px;
+                padding: 10px 8px;
+                font-size: 11px;
+            }
+
+            .tpp-tab-icon {
+                font-size: 18px;
+            }
+
+            .tpp-panel-header,
+            .tpp-section {
+                padding: 16px;
+            }
+
+            .tpp-summary-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .tpp-summary-actions {
+                width: 100%;
+            }
+
+            .tpp-summary-actions .tpp-btn {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+
+        /* ============================================
+           PRINT PREVIEW OVERLAY
+           ============================================ */
+        .tpp-print-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            display: none;
+            overflow-y: auto;
+            padding: 30px 20px;
+        }
+
+        .tpp-print-overlay.active {
+            display: block;
+        }
+
+        .tpp-print-preview {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Top toolbar */
+        .tpp-print-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            background: var(--tpp-dark);
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .tpp-print-toolbar-title {
+            font-size: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tpp-print-toolbar-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .tpp-print-toolbar-actions .tpp-btn {
+            padding: 8px 18px;
+            font-size: 13px;
+        }
+
+        .tpp-btn-close-print {
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .tpp-btn-close-print:hover {
+            background: rgba(255,255,255,0.22);
+        }
+
+        .tpp-btn-print-now {
+            background: var(--tpp-orange);
+            color: #fff;
+        }
+
+        .tpp-btn-print-now:hover {
+            background: var(--tpp-orange-dark);
+        }
+
+        /* Print page content */
+        .tpp-print-page {
+            padding: 40px 40px 30px;
+        }
+
+        .tpp-print-header {
+            text-align: center;
+            padding-bottom: 28px;
+            margin-bottom: 28px;
+            border-bottom: 3px solid var(--tpp-blue);
+        }
+
+        .tpp-print-logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--tpp-blue);
+            margin-bottom: 4px;
+        }
+
+        .tpp-print-logo span {
+            color: var(--tpp-orange);
+        }
+
+        .tpp-print-header-sub {
+            font-size: 13px;
+            color: var(--tpp-gray);
+            margin-top: 6px;
+        }
+
+        .tpp-print-date {
+            display: inline-block;
+            background: var(--tpp-blue-pale);
+            color: var(--tpp-blue-dark);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* Park blocks in print */
+        .tpp-print-park {
+            margin-bottom: 24px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .tpp-print-park-header {
+            padding: 14px 20px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tpp-print-park-header.mk { background: var(--mk-purple); }
+        .tpp-print-park-header.epcot { background: var(--epcot-teal); }
+        .tpp-print-park-header.hs { background: var(--hs-red); }
+        .tpp-print-park-header.ak { background: var(--ak-green); }
+
+        .tpp-print-park-body {
+            padding: 16px 20px;
+        }
+
+        .tpp-print-tier {
+            margin-bottom: 14px;
+        }
+
+        .tpp-print-tier:last-child {
+            margin-bottom: 0;
+        }
+
+        .tpp-print-tier-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--tpp-gray);
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+
+        .tpp-print-ride {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: var(--tpp-dark);
+            border-radius: 6px;
+        }
+
+        .tpp-print-ride:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .tpp-print-ride-check {
+            width: 20px;
+            height: 20px;
+            background: var(--tpp-success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .tpp-print-ride-check svg {
+            width: 12px;
+            height: 12px;
+            stroke: #fff;
+            stroke-width: 3;
+        }
+
+        .tpp-print-ride-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .tpp-print-ride-name {
+            font-weight: 600;
+            display: block;
+        }
+
+        .tpp-print-ride-wait {
+            margin-left: auto;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .tpp-print-ride-wait.high { background: var(--tpp-error-light); color: var(--tpp-error); }
+        .tpp-print-ride-wait.medium { background: var(--tpp-warning-light); color: #b45309; }
+        .tpp-print-ride-wait.low { background: var(--tpp-success-light); color: #15803d; }
+
+        .tpp-print-ride-note {
+            font-size: 12px;
+            color: var(--tpp-orange);
+            font-style: italic;
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* Checklist in print */
+        .tpp-print-checklist {
+            margin-top: 24px;
+            padding: 20px;
+            background: var(--tpp-blue-pale);
+            border-radius: 12px;
+        }
+
+        .tpp-print-checklist-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--tpp-blue-dark);
+            margin-bottom: 12px;
+        }
+
+        .tpp-print-checklist-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 20px;
+        }
+
+        .tpp-print-checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--tpp-gray-dark);
+        }
+
+        .tpp-print-checklist-item .checklist-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        /* Footer in print */
+        .tpp-print-footer {
+            text-align: center;
+            padding: 20px 40px;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--tpp-gray);
+        }
+
+        .tpp-print-footer a {
+            color: var(--tpp-blue);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* Empty state in print preview */
+        .tpp-print-empty {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .tpp-print-empty-icon {
+            font-size: 56px;
+            margin-bottom: 16px;
+            opacity: 0.4;
+        }
+
+        .tpp-print-empty p {
+            color: var(--tpp-gray);
+            font-size: 15px;
+        }
+
+        /* ============================================
+           @MEDIA PRINT - Actual print output
+           ============================================ */
+        @media print {
+            /* Hide all page content — header, nav, footer, sidebar, main content */
+            body.tpp-printing header,
+            body.tpp-printing footer,
+            body.tpp-printing nav,
+            body.tpp-printing aside,
+            body.tpp-printing .tpp-container,
+            body.tpp-printing .tpp-modal-overlay,
+            body.tpp-printing #wpadminbar,
+            body.tpp-printing .site-header,
+            body.tpp-printing .site-footer,
+            body.tpp-printing .site-navigation {
+                display: none !important;
+            }
+
+            /* Remove body background and spacing */
+            body.tpp-printing {
+                background: white !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* Show print overlay as the only content */
+            body.tpp-printing .tpp-print-overlay {
+                display: block !important;
+                position: static !important;
+                background: none !important;
+                padding: 0 !important;
+                overflow: visible !important;
+                z-index: auto !important;
+            }
+
+            body.tpp-printing .tpp-print-preview {
+                box-shadow: none;
+                border-radius: 0;
+                max-width: 100%;
+            }
+
+            body.tpp-printing .tpp-print-toolbar {
+                display: none !important;
+            }
+
+            body.tpp-printing .tpp-print-page {
+                padding: 10px;
+            }
+
+            body.tpp-printing .tpp-print-park {
+                break-inside: avoid;
+            }
+
+            body.tpp-printing .tpp-print-checklist {
+                break-inside: avoid;
+            }
+
+            body.tpp-printing .tpp-print-header {
+                border-bottom-width: 2px;
+            }
+
+            body.tpp-printing .tpp-print-footer {
+                margin-top: 20px;
+            }
+
+            body.tpp-printing .tpp-print-ride-check,
+            body.tpp-printing .tpp-print-park-header,
+            body.tpp-printing .tpp-print-date,
+            body.tpp-printing .tpp-print-checklist,
+            body.tpp-printing .tpp-print-ride-wait,
+            body.tpp-printing .tpp-print-ride-wait.high,
+            body.tpp-printing .tpp-print-ride-wait.medium,
+            body.tpp-printing .tpp-print-ride-wait.low {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
