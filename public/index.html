@@ -702,5 +702,21 @@
 </div>
 
 <script src="./js/planner.js"></script>
+<script>
+(function () {
+    function postHeight() {
+        var h = Math.max(
+            document.body.scrollHeight,
+            document.documentElement.scrollHeight
+        );
+        window.parent.postMessage({ tppHeight: h }, '*');
+    }
+    window.addEventListener('load', postHeight);
+    window.addEventListener('resize', postHeight);
+    new MutationObserver(postHeight).observe(document.body, {
+        childList: true, subtree: true, attributes: true
+    });
+})();
+</script>
 </body>
 </html>
