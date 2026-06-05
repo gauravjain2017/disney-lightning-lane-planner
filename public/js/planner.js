@@ -520,3 +520,22 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// ==========================
+// Auto-resize iframe (postMessage)
+// If this page is embedded in an iframe, send height to parent so
+// the parent can resize the iframe and avoid double-scrollbars.
+function sendHeightToParent() {
+    try {
+        const height = document.documentElement.scrollHeight || document.body.scrollHeight;
+        window.parent.postMessage({ type: 'tppHeight', height: height }, '*');
+    } catch (e) {
+        // ignore
+    }
+}
+
+window.addEventListener('load', sendHeightToParent);
+window.addEventListener('resize', sendHeightToParent);
+
+const _tppObserver = new MutationObserver(sendHeightToParent);
+_tppObserver.observe(document.body, { childList: true, subtree: true, attributes: true });

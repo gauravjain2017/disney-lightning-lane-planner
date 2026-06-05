@@ -19,8 +19,15 @@ export default async function handler(req, res) {
     }
 
     try {
-        const form = formidable();
-        const [fields] = await form.parse(req);
+        const form = formidable({ multiples: false });
+
+        // Parse the incoming multipart/form-data (FormData) from the client
+        const { fields } = await new Promise((resolve, reject) => {
+            form.parse(req, (err, fields, files) => {
+                if (err) return reject(err);
+                resolve({ fields, files });
+            });
+        });
 
         const email = Array.isArray(fields.email) ? fields.email[0] : fields.email;
         const selectionsRaw = Array.isArray(fields.selections) ? fields.selections[0] : fields.selections;
@@ -36,6 +43,12 @@ export default async function handler(req, res) {
             return res.status(400).json({ success: false, data: 'Invalid selection data.' });
         }
 
+        // Basic SMTP env checks (helps catch missing config on Vercel)
+        if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+            console.error('Missing SMTP configuration. Check SMTP_HOST/SMTP_USER/SMTP_PASS.');
+            return res.status(500).json({ success: false, data: 'Email service not configured.' });
+        }
+
         const transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
             port: parseInt(process.env.SMTP_PORT || '587'),
@@ -46,6 +59,7 @@ export default async function handler(req, res) {
             }
         });
 
+        // Attempt to send
         await transporter.sendMail({
             from: process.env.SMTP_FROM || process.env.SMTP_USER,
             to: email,
