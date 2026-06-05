@@ -263,7 +263,6 @@ function sendEmail() {
     const email = emailInput.value.trim();
     const errorEl = document.getElementById('emailError');
 
-    // Validate email
     if (!email || !email.includes('@') || !email.includes('.')) {
         errorEl.textContent = 'Please enter a valid email address.';
         errorEl.style.display = 'block';
@@ -271,7 +270,6 @@ function sendEmail() {
         return;
     }
 
-    // Check if there are any selections
     let hasSelections = false;
     for (const park in selections) {
         for (const tier in selections[park]) {
@@ -286,45 +284,46 @@ function sendEmail() {
         return;
     }
 
-    // Show loading state
     errorEl.style.display = 'none';
     document.getElementById('emailFormState').style.display = 'none';
     document.getElementById('emailLoadingState').style.display = 'block';
 
-    // Build form data
-    const formData = new FormData();
-    formData.append('action', 'send_parkplan_email');
-    formData.append('nonce', tppAjax.nonce);
-    formData.append('email', email);
-    formData.append('selections', JSON.stringify(selections));
+    // Listen for the response relayed back from the WordPress parent page
+    var emailResponseTimeout;
+    function handleEmailResponse(e) {
+        if (!e.data || !e.data.tppEmailResponse) return;
+        clearTimeout(emailResponseTimeout);
+        window.removeEventListener('message', handleEmailResponse);
 
-    // Send AJAX request
-    fetch(tppAjax.url, {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(result => {
+        const result = e.data.tppEmailResponse;
+        document.getElementById('emailLoadingState').style.display = 'none';
+
         if (result.success) {
-            // Show success state
-            document.getElementById('emailLoadingState').style.display = 'none';
             document.getElementById('emailSuccessState').style.display = 'block';
             showToast('Plan sent to ' + email + '!');
         } else {
-            // Show error, go back to form
-            document.getElementById('emailLoadingState').style.display = 'none';
             document.getElementById('emailFormState').style.display = '';
-            errorEl.textContent = result.data || 'Failed to send email. Please try again.';
+            errorEl.textContent = result.message || 'Failed to send email. Please try again.';
             errorEl.style.display = 'block';
         }
-    })
-    .catch(error => {
-        // Network error, go back to form
+    }
+    window.addEventListener('message', handleEmailResponse);
+
+    // Timeout fallback — 30 seconds
+    emailResponseTimeout = setTimeout(function () {
+        window.removeEventListener('message', handleEmailResponse);
         document.getElementById('emailLoadingState').style.display = 'none';
         document.getElementById('emailFormState').style.display = '';
-        errorEl.textContent = 'Network error. Please check your connection and try again.';
+        errorEl.textContent = 'Request timed out. Please try again.';
         errorEl.style.display = 'block';
-    });
+    }, 30000);
+
+    // Send email data to the WordPress parent page via postMessage
+    window.parent.postMessage({
+        tppAction: 'sendEmail',
+        email: email,
+        selections: selections
+    }, '*');
 }
 
 // Toast notification
