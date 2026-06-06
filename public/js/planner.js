@@ -40,6 +40,9 @@ function showPark(parkId) {
         panel.classList.remove('active');
     });
     document.getElementById(`panel-${parkId}`).classList.add('active');
+
+    // Re-send height after fadeIn animation completes (300ms)
+    setTimeout(sendHeightToParent, 320);
 }
 
 // Toggle attraction selection
@@ -235,6 +238,8 @@ function clearAllSelections() {
 // Toggle checklist
 function toggleChecklist() {
     document.getElementById('checklist').classList.toggle('open');
+    // Re-send height after max-height CSS transition completes (300ms)
+    setTimeout(sendHeightToParent, 320);
 }
 
 // Email modal
@@ -527,7 +532,7 @@ document.head.appendChild(style);
 function sendHeightToParent() {
     try {
         const height = document.documentElement.scrollHeight || document.body.scrollHeight;
-        window.parent.postMessage({ type: 'tppHeight', height: height }, '*');
+        window.parent.postMessage({ tppHeight: height }, '*');
     } catch (e) {
         // ignore
     }
@@ -536,5 +541,9 @@ function sendHeightToParent() {
 window.addEventListener('load', sendHeightToParent);
 window.addEventListener('resize', sendHeightToParent);
 
-const _tppObserver = new MutationObserver(sendHeightToParent);
+let _tppHeightTimer = null;
+const _tppObserver = new MutationObserver(function () {
+    clearTimeout(_tppHeightTimer);
+    _tppHeightTimer = setTimeout(sendHeightToParent, 50);
+});
 _tppObserver.observe(document.body, { childList: true, subtree: true, attributes: true });
