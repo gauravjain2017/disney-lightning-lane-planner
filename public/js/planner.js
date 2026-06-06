@@ -531,7 +531,12 @@ document.head.appendChild(style);
 // the parent can resize the iframe and avoid double-scrollbars.
 function sendHeightToParent() {
     try {
-        const height = document.documentElement.scrollHeight || document.body.scrollHeight;
+        // getBoundingClientRect().bottom measures actual rendered content bottom,
+        // avoiding the iframe viewport-height inflation that scrollHeight suffers from.
+        const container = document.querySelector('.tpp-container');
+        const height = container
+            ? Math.ceil(container.getBoundingClientRect().bottom)
+            : document.body.scrollHeight;
         window.parent.postMessage({ tppHeight: height }, '*');
     } catch (e) {
         // ignore
